@@ -1,14 +1,52 @@
+<div *ngIf="showSplash" class="splash"> 
+      <div class="spinner"></div>
+</div>
+
+
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Ionic Blank
+  <ion-toolbar color="orange">
+    <ion-title text-center>
+      Moments
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-card *ngFor="let item of posts">
+      <ion-card-subtitle padding>{{item.description}}</ion-card-subtitle>
+      <img [src]="item.image" style="height:400px"/>
+    <ion-card-content padding>
+        <ion-row>
+            <ion-badge color="orange"> 
+              {{item.user}}
+            </ion-badge>
+        </ion-row>   
+        <ion-grid>
+          <ion-row>
+              <ion-col col-4>
+                <ion-button  color="dark" fill="clear"  ion-button icon-start clear >
+                  <ion-icon name="thumbs-up" style="font-size:25px;"></ion-icon>
+                  <div>{{item.likes}}</div>
+                </ion-button>
+              </ion-col>
+              <ion-col col-4>
+                <ion-button (click)="comment()" color="dark"  fill="clear" ion-button icon-start clear>
+                  <ion-icon name="md-chatboxes" style="font-size:25px;"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col col-4>
+                  <ion-button color="dark" fill="clear" (click)="share(item)" ion-button icon-start clear >
+                      <ion-icon name="share" style="font-size:25px;"></ion-icon>
+                  </ion-button>
+              </ion-col>
+          </ion-row>
+        </ion-grid> 
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end"  (click)="OpenModal()" slot="fixed">
+      <ion-fab-button color="orange">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>
