@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar color="dark">
-      <ion-button slot="start" fill="clear" (click)="addpost()">
+      <ion-button slot="start" fill="clear" (click)="close()">
         <ion-icon style="color:#ffff; font-size:25px;" name="arrow-round-back"></ion-icon>
       </ion-button>
       <ion-title text-center>
@@ -15,13 +15,13 @@
   <ion-content padding>
       <ion-item>
           <ion-label position="floating">write something!</ion-label>
-          <ion-input></ion-input>
+          <ion-textarea [(ngModel)]="descriptions"  rows="1"></ion-textarea>
       </ion-item>
       <ion-card>
         <img *ngIf="image" [src]="image" />
       </ion-card>
 
-      <ion-label *ngIf="url">{{url}}</ion-label>
+      <ion-label *ngIf="uploadPercent">subiendo...</ion-label>
     
   </ion-content>
 

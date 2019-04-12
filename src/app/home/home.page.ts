@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import {timer} from 'rxjs';
+
 import {FormComponent} from '../components/form/form.component';
 import {CommentComponent} from '../components/comment/comment.component';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
-import { CrudService } from "../services/firebase/crud.service";
+import { CrudService} from "../services/firebase/crud.service";
+import { AuthService} from "../services/firebase/auth.service";
+import { ActionSheetController } from '@ionic/angular';
 
-interface posts {
-  user: string,
-  img : string,
-  description : string,
-  likes : string,
-  id:string
-}
+
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -20,34 +18,51 @@ interface posts {
 })
 export class HomePage {
   public posts : any = [];
-  imagenes: any   = [
-    {nombre :'yesid', like:'45', description:'es simplemente el texto de relleno de las imprentas y archivos de texto.', ruta : 'assets/img/client-1.jpg'},
-    {nombre :'nelly', like:'58',description:'Jugando el lunes', ruta : 'assets/img/client-2.jpg'},
-    {nombre :'gabriel', like:'87', description:'Jugando el sabado', ruta : 'assets/img/team-1.jpg'},
-    {nombre :'eris', like:'59',description:'Jugando el martes', ruta : 'assets/img/team-2.jpg'},
-    {nombre :'yamid', like:'48', description:'Jugando el viernes', ruta : 'assets/img/team-3.jpg'},
-  ]
   foto : any;
+  usuario:{
+    id: any,
+    name: any
+  };
 
-  showSplash = true;
+  public user:any;
+  
+ 
   constructor(public modal : ModalController,
               private socialSharing: SocialSharing,
-              private crudservice : CrudService){             
-    timer(3000).subscribe(() => this.showSplash = false);
+              private crudservice : CrudService,
+              private auth : AuthService,
+              public actionSheetController: ActionSheetController){             
+  
     this.getPost();
+
   }
+
 
 
   getPost(){
     this.crudservice.getPost().subscribe((data)=>{
-      data.map(post =>{
-        const data : posts = post.payload.doc.data() as posts;
-        data.id = post.payload.doc.id;
-        this.posts.push(data);
-        console.log(data);
-      })     
+      this.posts = data;
+      console.log(data)
     })
   }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Opciones',
+      buttons: [{
+        text: 'Sign off',
+        role: 'destructive',
+        icon: 'log-out',
+        handler: () => {
+          
+          this.auth.logout();
+
+        },
+      }]
+    });
+    await actionSheet.present();
+  }
+
 
 
   OpenModal(){

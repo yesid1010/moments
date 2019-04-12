@@ -1,10 +1,9 @@
-<div *ngIf="showSplash" class="splash"> 
-      <div class="spinner"></div>
-</div>
-
 
 <ion-header>
   <ion-toolbar color="orange">
+      <ion-button slot="end" fill="clear" (click)="presentActionSheet()">
+          <ion-icon style="color:#fff" name="menu"></ion-icon>
+        </ion-button>
     <ion-title text-center>
       Moments
     </ion-title>
@@ -13,8 +12,14 @@
 
 <ion-content>
   <ion-card *ngFor="let item of posts">
+      <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="item.imgU">
+          </ion-avatar>
+          <p><b>{{item.user}}</b></p>
+      </ion-item>
       <ion-card-subtitle padding>{{item.description}}</ion-card-subtitle>
-      <img [src]="item.image" style="height:400px"/>
+      <ion-img [src]="item.image"></ion-img>
     <ion-card-content padding>
         <ion-row>
             <ion-badge color="orange"> 
@@ -25,7 +30,7 @@
           <ion-row>
               <ion-col col-4>
                 <ion-button  color="dark" fill="clear"  ion-button icon-start clear >
-                  <ion-icon name="thumbs-up" style="font-size:25px;"></ion-icon>
+                  <ion-icon name="football" style="font-size:25px;"></ion-icon>
                   <div>{{item.likes}}</div>
                 </ion-button>
               </ion-col>

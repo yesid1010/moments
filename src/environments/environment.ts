@@ -7,12 +7,12 @@ export const environment = {
 };
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyAtHQv-yWiVz84XaXXWaNISSvSZfO0pAvg",
-  authDomain: "lista-8557c.firebaseapp.com",
-  databaseURL: "https://lista-8557c.firebaseio.com",
-  projectId: "lista-8557c",
-  storageBucket: "lista-8557c.appspot.com",
-  messagingSenderId: "23318777124"
+    apiKey: "AIzaSyDed92IjLypul6tDU2gAdtzQkURrLzUIJs",
+    authDomain: "chat-d04fc.firebaseapp.com",
+    databaseURL: "https://chat-d04fc.firebaseio.com",
+    projectId: "chat-d04fc",
+    storageBucket: "chat-d04fc.appspot.com",
+    messagingSenderId: "780196278713"
 }
 
 /*

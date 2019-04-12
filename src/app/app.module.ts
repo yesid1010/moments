@@ -17,13 +17,15 @@ import {AngularFirestoreModule,FirestoreSettingsToken} from '@angular/fire/fires
 import { AngularFireModule } from "@angular/fire";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { AngularFireAuthModule } from "@angular/fire/auth";
+import { FormsModule } from "@angular/forms";
 import { firebaseConfig } from '../environments/environment';
+
 
 @NgModule({
   declarations: [AppComponent,FormComponent,CommentComponent],
   entryComponents: [FormComponent,CommentComponent],
-  imports: [AngularFireStorageModule,
-            AngularFirestoreModule,
+  imports: [FormsModule, AngularFireStorageModule,
+            AngularFirestoreModule.enablePersistence(),
             AngularFireAuthModule,
             BrowserModule, 
             IonicModule.forRoot(), 

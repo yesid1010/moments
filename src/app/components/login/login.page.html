@@ -1,0 +1,28 @@
+<div *ngIf="showSplash" class="splash"> 
+    <div class="spinner"></div>
+</div>
+
+<ion-header>
+    <ion-toolbar color="primary">
+      <ion-title text-center>Log In</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  
+  <ion-content padding>
+    <img class="icon" src="assets/icon/icon.png" alt="">
+  <ion-item>
+    <ion-label position="floating" > Email</ion-label>
+    <ion-input type="text" [(ngModel)]="email" name="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating" > password</ion-label>
+    <ion-input [(ngModel)]="password" type="password" name="password"></ion-input>
+  </ion-item>
+  <br>
+  <ion-button (click)="onSubmitLogin()" expand="block">Login</ion-button>
+  <br>
+  <p text-center routerLink="/registro">Create Account</p>
+  
+  </ion-content>
+  
