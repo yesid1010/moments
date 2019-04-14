@@ -1,21 +1,39 @@
-
 <ion-header>
   <ion-toolbar color="orange">
       <ion-button slot="end" fill="clear" (click)="presentActionSheet()">
           <ion-icon style="color:#fff" name="menu"></ion-icon>
         </ion-button>
-        <ion-button slot="start" fill="clear" [routerLink]="['/profile',user]">
-          <ion-icon style="color:#ffff; font-size:35px;" name="contact"></ion-icon>
+      <ion-button slot="start" fill="clear" [routerLink]="['/home']">
+          <ion-icon style="color:#ffff; font-size:35px;" name="paper"></ion-icon>
         </ion-button>
-    <ion-title text-center>
-      Moments
-    </ion-title>
+        
+        <ion-title text-center>
+           Profile  
+        </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of posts">
-      <ion-item [routerLink]="['/profile',item.idUs]">
+
+  
+    <img *ngIf="image" [src]="image"/>
+    <ion-toolbar>
+      <ion-button slot="start"  fill="clear"  color="dark"  ion-button icon-start clear>
+          <ion-icon name="add" style="font-size:35px;"></ion-icon>
+          seguir
+        </ion-button>
+        <ion-button slot="end" fill="clear"   color="dark" ion-button icon-start clear >
+          <ion-icon name="camera" style="font-size:35px;"></ion-icon>
+      </ion-button>
+  </ion-toolbar>
+
+  <div padding>
+      <ion-button *ngIf="name" shape="round" fill="outline">{{name}}</ion-button>
+      <ion-button padding expand="full" shape="round" fill="outline">Publications</ion-button>
+  </div>
+
+  <ion-card *ngFor="let item of posts" padding>
+      <ion-item>
           <ion-avatar slot="start">
             <img [src]="item.imgU">
           </ion-avatar>
@@ -52,9 +70,4 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-fab vertical="bottom" horizontal="end"  (click)="OpenModal()" slot="fixed">
-      <ion-fab-button color="orange">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
 </ion-content>

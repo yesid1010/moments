@@ -21,7 +21,8 @@ export class HomePage {
   foto : any;
   usuario:{
     id: any,
-    name: any
+    name: any,
+    image : any
   };
 
   public user:any;
@@ -32,11 +33,24 @@ export class HomePage {
               private crudservice : CrudService,
               private auth : AuthService,
               public actionSheetController: ActionSheetController){             
-  
-    this.getPost();
+    this.observer();
+    //this.getPost();
 
   }
-
+  observer(){
+    this.auth.observer().then((data)=>{
+        this.crudservice.getUser(data).subscribe((data)=>{
+            this.usuario = {
+              id: data.uid,
+              name:data.name,
+              image : data.image
+            };
+            this.user = data.uid;
+            this.getPost();
+        })
+    })
+  
+ }
 
 
   getPost(){

@@ -12,16 +12,24 @@ import { Router } from '@angular/router';
 })
 export class FormComponent{
   image : any;
-  url:any;
+  url_image:any;
   likes = 0;
-  date :any;
-  hour : any;
-
   usuario:{
     id: any,
     name: any,
     image:any
   };
+
+  post:{
+    description: any,
+    likes : 0,
+    url_image: any,
+    usuario:{
+      id: any,
+      name: any,
+      image:any
+    }
+  }
   uploadPercent:boolean=false;
   public descriptions:string;
   
@@ -34,8 +42,7 @@ export class FormComponent{
               private auth : AuthService){
 
                 this.observer();
-                this.hoyFecha();
-               }
+              }
 
   close(){
     this.modal.dismiss();
@@ -72,21 +79,28 @@ export class FormComponent{
    }
 
    //upload the image and download your url of firebase storage 
-   UploadImg(){
-    this.uploadPercent = true;
-    this.crudservice.uploapImg('images',this.image).then((snapshot)=>{
-        snapshot.ref.getDownloadURL().then((url)=>{
-        this.url =  url;
-        //call method addpost
-        this.addpost();
-        this.router.navigate(['/home']);
-      });
+  UploadImg(){
+
+    this.crudservice.uploapImg('images',this.image)
+    .then((url)=>{
+      this.url_image = url;
+      this.addpost();
+      this.router.navigate(['/home']);
+    }).catch(err => console.log(err))
+    // this.uploadPercent = true;
+    // this.crudservice.uploapImg('images',this.image).then((snapshot)=>{
+    //     snapshot.ref.getDownloadURL().then((url)=>{
+    //     this.url =  url;
+    //     //call method addpost
+    //     this.addpost();
+    //     this.router.navigate(['/home']);
+    //   });
      
-    }).catch(err => console.log(err));
+    // }).catch(err => console.log(err));
    }
    //Method to add a post to firestore
    addpost(){
-     this.crudservice.addPost(this.usuario.id,this.usuario.name,this.usuario.image,this.url,this.likes,this.descriptions).then(()=>{ 
+     this.crudservice.addPost(this.usuario.id,this.usuario.name,this.usuario.image,this.url_image,this.likes,this.descriptions).then(()=>{ 
       this.modal.dismiss();
      });
    }
@@ -105,17 +119,17 @@ export class FormComponent{
     
    }
 
-  hoyFecha(){
-    let hoy = new Date();
-    let dd = hoy.getDate();
-    let mm = hoy.getMonth()+1;
-    let yyyy = hoy.getFullYear();
-    let hour = hoy.getHours();
-    let minutes = hoy.getMinutes();
+  // hoyFecha(){
+  //   let hoy = new Date();
+  //   let dd = hoy.getDate();
+  //   let mm = hoy.getMonth()+1;
+  //   let yyyy = hoy.getFullYear();
+  //   let hour = hoy.getHours();
+  //   let minutes = hoy.getMinutes();
     
-    this.date = dd+'/'+mm+'/'+yyyy;
-    this.hour = hour+'/'+minutes
-  } 
+  //   this.date = dd+'/'+mm+'/'+yyyy;
+  //   this.hour = hour+'/'+minutes
+  // } 
 
 
 

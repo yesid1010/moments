@@ -19,7 +19,7 @@ export class CrudService {
   constructor( private firestore:AngularFirestore,
                private store : AngularFireStorage) { }
 
-  getPost(){
+  getPost(){ 
     return this.firestore.collection('post').snapshotChanges().pipe(map(posts => {
       return posts.map(a =>{
         const data = a.payload.doc.data() as posts;
@@ -29,31 +29,40 @@ export class CrudService {
     }));
   }
 
-  //
+  getPostUser(user){ 
+    return this.firestore.collection('post',ref => ref.where('idUs','==',user)).snapshotChanges().pipe(map(posts => {
+      return posts.map(a =>{
+        const data = a.payload.doc.data() as posts;
+        data.id = a.payload.doc.id;
+        return data;
+      })
+    }));
+  }
+
+
+  // usuario logueado
   getUser(user:any){
     let users;
     return  users = this.firestore.collection('users').doc(user).get().pipe(map(data=>{
        if(data.exists){
          return data.data();
        }
-    }))
-    // return new Promise ((resolve)=>{
-    //   let users = this.firestore.collection('users').doc(user);
-    //     users.get().subscribe((doc)=>{
-    //     if(doc.exists){
-    //        resolve(doc.data());
-    //     }
-    //   })
-    // })
-    
+    }))    
   }
 
+  // guardo la imagen en firebase storage y devuelvo la url de dicha imagen
   uploapImg(carpeta,img){
     const rand = Math.floor((Math.random()*645)*8);
     const rand2=Math.floor((Math.random()*45)*82);
-    const foto = this.store.ref(carpeta+'/foto'+rand+rand2);
-    
-    return foto.putString(img,'data_url'); 
+    return new Promise<any>((resolve,reject)=>{
+      const foto = this.store.ref(carpeta+'/foto'+rand+rand2);
+      foto.putString(img,'data_url').then(snapshot => {
+        snapshot.ref.getDownloadURL()
+        .then(res => resolve(res))
+      }, err =>{
+          reject(err);
+      })
+    })
   }
 
 
@@ -66,7 +75,7 @@ export class CrudService {
       imgU : imgU,
       image :image,
       likes : like,
-      description : desc
+      description : desc,
     })
   }
 }

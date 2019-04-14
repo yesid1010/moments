@@ -1,11 +1,11 @@
 <ion-header>
-    <ion-toolbar color="secondary">
+    <ion-toolbar color="primary">
       <ion-title text-center>Sign up</ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content padding>
-    <img (click)="buscarFoto()" class="icon" *ngIf="icon" src="assets/icon/icon.png" alt="">
+    <img (click)="buscarFoto()" class="icon" *ngIf="icon" src="assets/icon/icon.svg" alt="">
     <ion-img  (click)="buscarFoto()" class="icon" *ngIf="image" [src]="image"></ion-img>
   
     <ion-item>
@@ -22,9 +22,9 @@
     <ion-input  type="password" [(ngModel)]="password" name="password"></ion-input>
   </ion-item>
   <br>
-  <ion-button color="secondary" expand="block" (click)="UploadImg()">Sign up</ion-button>
+  <ion-button color="primary" expand="block" (click)="UploadImg()">Sign up</ion-button>
   <br>
-  <p text-center routerLink="/login">LogIn</p>
+  <p text-center routerLink="/login"><b>LogIn</b> </p>
   
   
   </ion-content>
