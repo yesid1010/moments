@@ -80,13 +80,15 @@ export class FormComponent{
 
    //upload the image and download your url of firebase storage 
   UploadImg(){
-
+    this.uploadPercent=true;
     this.crudservice.uploapImg('images',this.image)
     .then((url)=>{
       this.url_image = url;
       this.addpost();
-      this.router.navigate(['/home']);
-    }).catch(err => console.log(err))
+    }).catch(err => {
+      alert('A ocurrido un error!!')
+      this.uploadPercent = false;
+    })
     // this.uploadPercent = true;
     // this.crudservice.uploapImg('images',this.image).then((snapshot)=>{
     //     snapshot.ref.getDownloadURL().then((url)=>{
@@ -100,9 +102,11 @@ export class FormComponent{
    }
    //Method to add a post to firestore
    addpost(){
-     this.crudservice.addPost(this.usuario.id,this.usuario.name,this.usuario.image,this.url_image,this.likes,this.descriptions).then(()=>{ 
-      this.modal.dismiss();
-     });
+     this.crudservice.addPost(this.usuario.id,this.usuario.name,this.usuario.image,this.url_image,this.likes,this.descriptions)
+     .then(()=>{ 
+      this.router.navigate(['/home'])
+     })
+     .catch( () => alert('A ocurrido un error'));
    }
 
    //method to know which user has logged in

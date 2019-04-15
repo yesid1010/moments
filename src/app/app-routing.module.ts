@@ -7,7 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: './components/login/login.module#LoginPageModule',canActivate:[NologinGuard] },
   { path: 'home', loadChildren: './home/home.module#HomePageModule',canActivate:[AuthGuard]},
-  { path: 'registro', loadChildren: './components/registro/registro.module#RegistroPageModule'},
+  { path: 'registro', loadChildren: './components/registro/registro.module#RegistroPageModule',canActivate:[NologinGuard]},
   { path: 'profile/:id', loadChildren: './components/profile/profile.module#ProfilePageModule' },
 
   

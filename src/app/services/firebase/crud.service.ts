@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { AngularFireStorage} from '@angular/fire/storage';
 import { map  } from "rxjs/operators";
+import { resolve } from 'url';
 
 export interface posts {
   user: string,
@@ -67,15 +68,19 @@ export class CrudService {
 
 
   addPost(idUser:any,name:any,imgU:any,image:string,like,desc:string){
-
-   const id = this.firestore.createId();
-   return  this.firestore.collection('post').doc(id).set({
-      idUs : idUser,
-      user : name,
-      imgU : imgU,
-      image :image,
-      likes : like,
-      description : desc,
+    return new Promise((resolve,reject)=>{
+      const id = this.firestore.createId();
+      this.firestore.collection('post').doc(id).set({
+        idUs : idUser,
+        user : name,
+        imgU : imgU,
+        image :image,
+        likes : like,
+        description : desc,
+      })
+      .then( () => resolve())
+      .catch(()=> reject());
     })
+  
   }
 }

@@ -27,7 +27,7 @@
   <ion-footer>
       <ion-toolbar>
             <ion-textarea placeholder="Write a comment" rows="1"></ion-textarea>
-            <ion-button slot="end"  fill="clear"  color="dark"  ion-button icon-start clear>
+            <ion-button slot="end" (click)="addComment()"  fill="clear"  color="dark"  ion-button icon-start clear>
                 <ion-icon name="send" style="font-size:25px;"></ion-icon>
               </ion-button>
       </ion-toolbar>

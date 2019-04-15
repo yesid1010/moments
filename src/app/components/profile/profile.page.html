@@ -18,11 +18,11 @@
   
     <img *ngIf="image" [src]="image"/>
     <ion-toolbar>
-      <ion-button slot="start"  fill="clear"  color="dark"  ion-button icon-start clear>
+      <ion-button slot="start" (click)="mantenimiento()" fill="clear"  color="dark"  ion-button icon-start clear>
           <ion-icon name="add" style="font-size:35px;"></ion-icon>
           seguir
         </ion-button>
-        <ion-button slot="end" fill="clear"   color="dark" ion-button icon-start clear >
+        <ion-button slot="end" fill="clear" (click)="mantenimiento()"  color="dark" ion-button icon-start clear >
           <ion-icon name="camera" style="font-size:35px;"></ion-icon>
       </ion-button>
   </ion-toolbar>
@@ -69,5 +69,9 @@
         </ion-grid> 
     </ion-card-content>
   </ion-card>
-
+  <ion-fab vertical="bottom" horizontal="end"  (click)="OpenModal()" slot="fixed">
+    <ion-fab-button color="orange">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -24,4 +24,7 @@ export class CommentComponent implements OnInit {
     this.modal.dismiss();
   }
 
+  addComment(){
+    alert('!! Lo sentimos, estamos en mantenimiento!!')
+  }
 }

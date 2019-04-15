@@ -23,6 +23,7 @@ export class RegistroPage implements OnInit {
 
   OnSubmitRegister(){
     this.auth.register(this.email, this.password,this.name,this.url).then( auth => {
+      alert('Registro Exitoso');
       this.router.navigate(['/home'])
       console.log(auth)
     }).catch(err => console.log(err))
@@ -44,17 +45,14 @@ export class RegistroPage implements OnInit {
     })
   }
 
-  UploadImg(){
-    this.crudservice.uploapImg('perfil',this.image).then((snapshot)=>{
-        snapshot.ref.getDownloadURL().then((url)=>{
-        this.url =  url;
-        //call method addpost
-        this.OnSubmitRegister();
-        this.router.navigate(['/home']);
-      });
-     
-    }).catch(err => console.log(err));
-   }
 
+   UploadImg(){
+    this.crudservice.uploapImg('perfil',this.image)
+    .then((url)=>{
+      this.url = url;
+      this.OnSubmitRegister();
+    }).catch(err =>  alert('Registro Fallido'))
+
+   }
 
 }
